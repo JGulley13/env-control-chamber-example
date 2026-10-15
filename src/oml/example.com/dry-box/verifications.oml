@@ -1,0 +1,49 @@
+description <http://example.com/dry-box/verifications#> as verifications {
+    uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/verification#> as verification
+    extends <http://example.com/dry-box/requirements#> as requirements
+    extends <http://example.com/dry-box/components#> as components
+
+    // Verification cases can also be edited through src/md/Verifications.md (EC Chamber Verification editor).
+
+    @rdfs:label "Humidity Soak Test"
+    instance VC1 : verification:VerificationCase [
+        base:description "Close the box with two spools loaded and log humidity for 24 hours."
+        base:expression "Logged relative humidity stays at or below 20% after the first hour."
+        verification:verifies requirements:R1
+        verification:method "Test"
+        verification:status "Not Started"
+        verification:hasEvidence components:HumiditySensor
+    ]
+
+    @rdfs:label "Drying Cycle Test"
+    instance VC2 : verification:VerificationCase [
+        base:description "Run a full drying cycle and log the air temperature."
+        base:expression "Logged air temperature settles at 50 degrees Celsius during the cycle."
+        verification:verifies requirements:R2
+        verification:method "Test"
+        verification:status "Not Started"
+        verification:hasEvidence components:TemperatureSensor
+    ]
+
+    @rdfs:label "Heater Thermal Analysis"
+    instance VC3 : verification:VerificationCase [
+        base:description "Analyze the PTC heater's self-limiting temperature with the box sealed."
+        base:expression "The worst-case air temperature stays below 65 degrees Celsius."
+        verification:verifies requirements:R3
+        verification:method "Analysis"
+        verification:status "Not Started"
+        verification:hasEvidence components:DryerHeater
+    ]
+
+    @rdfs:label "Cartridge Inspection"
+    instance VC4 : verification:VerificationCase [
+        base:description "Inspect how the desiccant cartridge is mounted in the box."
+        base:expression "The cartridge can be removed and refitted by hand with no tools."
+        verification:verifies requirements:R4
+        verification:method "Inspection"
+        verification:status "Not Started"
+        verification:hasEvidence components:DesiccantCartridge
+    ]
+}

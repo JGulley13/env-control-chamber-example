@@ -1,0 +1,7 @@
+description bundle <http://example.com/dry-box/bundle#> as d-bundle {
+    uses <https://www.example.com/bundle#>
+    includes <http://example.com/dry-box/stakeholders#>
+    includes <http://example.com/dry-box/components#>
+    includes <http://example.com/dry-box/requirements#>
+    includes <http://example.com/dry-box/verifications#>
+}

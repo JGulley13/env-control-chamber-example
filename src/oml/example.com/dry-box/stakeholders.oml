@@ -1,0 +1,17 @@
+description <http://example.com/dry-box/stakeholders#> as stakeholders {
+    uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+    uses <https://www.modelware.io/sierra/stakeholder#> as stakeholder
+    uses <https://www.modelware.io/sierra/base#> as base
+
+    @rdfs:label "Maker"
+    instance Maker : stakeholder:Stakeholder [
+        base:description "Prints with moisture-sensitive filament and loads spools into the box."
+        base:category "User"
+    ]
+
+    @rdfs:label "Safety Officer"
+    instance SafetyOfficer : stakeholder:Stakeholder [
+        base:description "Ensures the heated box cannot damage filament or create a fire risk."
+        base:category "Support"
+    ]
+}

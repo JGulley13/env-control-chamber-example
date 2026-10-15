@@ -1,0 +1,61 @@
+description <http://example.com/dry-box/components#> as components {
+    uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <http://www.example.com/environment#> as environment
+
+    // The enclosure, built from the method's environment vocabulary
+
+    @rdfs:label "Filament Dry Box"
+    instance DryBox : environment:Chamber [
+        base:description "Sealed enclosure that stores and dries two filament spools."
+        environment:hasSensor HumiditySensor
+        environment:hasSensor TemperatureSensor
+        environment:hasActuator DryerHeater
+        environment:hasActuator DesiccantCartridge
+        environment:maintains BoxHumidity
+    ]
+
+    @rdfs:label "Humidity Sensor"
+    instance HumiditySensor : environment:HumiditySensor [
+        base:description "Measures relative humidity inside the box."
+        base:isContainedBy DryBox
+        environment:gauges BoxHumidity
+    ]
+
+    @rdfs:label "Temperature Sensor"
+    instance TemperatureSensor : environment:TemperatureSensor [
+        base:description "Measures air temperature inside the box."
+        base:isContainedBy DryBox
+        environment:gauges BoxTemperature
+    ]
+
+    @rdfs:label "Dryer Heater"
+    instance DryerHeater : environment:Heater [
+        base:description "Low-wattage PTC heater that warms the box to drive moisture out of the filament."
+        base:isContainedBy DryBox
+        environment:regulates BoxTemperature
+    ]
+
+    @rdfs:label "Desiccant Cartridge"
+    instance DesiccantCartridge : environment:Dehumidifier [
+        base:description "Replaceable silica gel cartridge that absorbs moisture released by the filament."
+        base:isContainedBy DryBox
+        environment:regulates BoxHumidity
+    ]
+
+    // Conditions and their limits
+
+    @rdfs:label "Box Humidity"
+    instance BoxHumidity : environment:Humidity [
+        base:description "Relative humidity inside the box, in percent."
+        environment:setpoint 15.0
+        environment:upperLimit 20.0
+    ]
+
+    @rdfs:label "Box Temperature"
+    instance BoxTemperature : environment:Temperature [
+        base:description "Air temperature inside the box, in degrees Celsius."
+        environment:setpoint 50.0
+        environment:upperLimit 65.0
+    ]
+}

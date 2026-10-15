@@ -1,0 +1,44 @@
+description <http://example.com/dry-box/requirements#> as requirements {
+    uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/stakeholder#> as stakeholder
+    extends <http://example.com/dry-box/stakeholders#> as stakeholders
+
+    // Requirements can also be edited through src/md/Requirements.md (Sierra Requirements editor).
+
+    @rdfs:label "Humidity Limit"
+    instance R1 : stakeholder:Requirement [
+        base:description "Humidity limit"
+        base:expression "The dry box shall keep the relative humidity inside the box at or below 20%."
+        stakeholder:isStatedBy stakeholders:Maker
+        base:category "Performance"
+        base:priority "High"
+    ]
+
+    @rdfs:label "Drying Temperature"
+    instance R2 : stakeholder:Requirement [
+        base:description "Drying temperature"
+        base:expression "The dry box shall hold the air temperature inside the box at 50 degrees Celsius during a drying cycle."
+        stakeholder:isStatedBy stakeholders:Maker
+        base:category "Performance"
+        base:priority "Medium"
+    ]
+
+    @rdfs:label "Over-Temperature Protection"
+    instance R3 : stakeholder:Requirement [
+        base:description "Over-temperature protection"
+        base:expression "The dry box shall never let the air temperature inside the box exceed 65 degrees Celsius."
+        stakeholder:isStatedBy stakeholders:SafetyOfficer
+        base:category "Safety"
+        base:priority "High"
+    ]
+
+    @rdfs:label "Replaceable Desiccant"
+    instance R4 : stakeholder:Requirement [
+        base:description "Replaceable desiccant"
+        base:expression "The desiccant cartridge shall be replaceable by the user without tools."
+        stakeholder:isStatedBy stakeholders:Maker
+        base:category "Maintenance"
+        base:priority "Low"
+    ]
+}

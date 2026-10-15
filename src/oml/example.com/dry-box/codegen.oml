@@ -1,0 +1,10 @@
+description <http://example.com/dry-box/codegen#> as configs {
+    uses <http://opencaesar.io/codegen#> as codegen
+    extends <http://www.example.com/codegen/verification-matrix#> as rvm
+
+    instance matrix : codegen:Config [
+        codegen:spec rvm:VerificationMatrixSpec
+        codegen:context "http://example.com/dry-box/bundle"
+        codegen:binding [ codegen:key "path" codegen:value "build/docs" ]
+    ]
+}
